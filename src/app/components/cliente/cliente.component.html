@@ -1,0 +1,241 @@
+<div class="container">
+  <h2 class="text-center">{{ strTitle }}</h2>
+  <button class="btn btn-success btn-block mb-2" (click)="openCentrado(crear)">
+    Nuevo
+  </button>
+  <table class="table table-bordered text-center">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Email</th>
+        <th scope="col">Fecha de nacimiento</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of clientes; let i = index">
+        <td>{{ c.idCliente }}</td>
+        <td>{{ c.nombre }}</td>
+        <td>{{ c.apellido }}</td>
+        <td>{{ c.direccion }}</td>
+        <td>{{ c.email }}</td>
+        <td>{{ c.fechaNacimiento | date }}</td>
+        <td>{{ c.telefono }}</td>
+        <td>
+          <button
+            class="btn bg-main btn-editar"
+            (click)="openEditar(editar, c)"
+          ></button>
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="eliminarCliente(c)"></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #crear let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Crear Cliente</h4>
+    <button
+      class="close"
+      aria-label="close"
+      type="button"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputFistName">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputFistName"
+            name="inputFistName"
+            [(ngModel)]="clientModal.nombre"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputLastName">Apellido</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputLastName"
+            name="inputLastName"
+            [(ngModel)]="clientModal.apellido"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputDireccion">Direccion</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputDireccion"
+          name="inputDireccion"
+          [(ngModel)]="clientModal.direccion"
+        />
+      </div>
+      <div class="form-group">
+        <label for="inputEmail">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="inputEmail"
+          name="inputEmail"
+          [(ngModel)]="clientModal.email"
+        />
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputPhone">Teléfono</label>
+          <input
+            type="number"
+            class="form-control"
+            id="inputPhone"
+            name="inputPhone"
+            [(ngModel)]="clientModal.telefono"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputBirthdate">Fecha de nacimiento</label>
+          <input
+            type="date"
+            class="form-control"
+            id="inputBirthdate"
+            name="inputBirthdate"
+            [(ngModel)]="clientModal.fechaNacimiento"
+          />
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-block btn-success color-main"
+        (click)="crearCliente()"
+      >
+        Crear
+      </button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger btn-block"
+      (click)="modal.close()"
+    >
+      Cancelar
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #editar let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Editar Cliente</h4>
+    <button
+      class="close"
+      aria-label="close"
+      type="button"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputFistName">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputFistName"
+            name="inputFistName"
+            [(ngModel)]="clientModal.nombre"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputLastName">Apellido</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputLastName"
+            name="inputLastName"
+            [(ngModel)]="clientModal.apellido"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputDireccion">Direccion</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputDireccion"
+          name="inputDireccion"
+          [(ngModel)]="clientModal.direccion"
+        />
+      </div>
+      <div class="form-group">
+        <label for="inputEmail">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="inputEmail"
+          name="inputEmail"
+          [(ngModel)]="clientModal.email"
+        />
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputPhone">Teléfono</label>
+          <input
+            type="number"
+            class="form-control"
+            id="inputPhone"
+            name="inputPhone"
+            [(ngModel)]="clientModal.telefono"
+          />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputBirthdate">Fecha de nacimiento</label>
+          <input
+            type="date"
+            class="form-control"
+            id="inputBirthdate"
+            name="inputBirthdate"
+            [(ngModel)]="clientModal.fechaNacimiento"
+          />
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-block btn-success color-main"
+        (click)="editarCliente()"
+      >
+        Editar
+      </button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger btn-block"
+      (click)="modal.close()"
+    >
+      Cancelar
+    </button>
+  </div>
+</ng-template>

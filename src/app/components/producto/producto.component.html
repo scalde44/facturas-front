@@ -1,0 +1,104 @@
+<div class="container">
+    <h2 class="text-center">{{ strTitle }}</h2>
+    <button class="btn btn-success btn-block mb-2" (click)="openCentrado(crear)">
+    Nuevo
+  </button>
+    <table class="table table-bordered text-center">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of productos; let i = index">
+                <td>{{ p.idProducto }}</td>
+                <td>{{ p.nombre }}</td>
+                <td>{{ p.precio }}</td>
+                <td>{{ p.stock }}</td>
+                <td>
+                    <button class="btn bg-main btn-editar" (click)="openEditar(editar, p)"></button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="eliminarProducto()"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #crear let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Crear Producto</h4>
+        <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="inputFistName">Nombre</label>
+                <input type="text" class="form-control" id="inputFistName" name="inputFistName" [(ngModel)]="productModal.nombre" />
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputPrecio">Precio</label>
+                    <input type="number" class="form-control" id="inputPrecio" name="inputPrecio" [(ngModel)]="productModal.precio" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputStock">Stock</label>
+                    <input type="number" class="form-control" id="inputStock" name="inputStock" [(ngModel)]="productModal.stock" />
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-block btn-success color-main" (click)="crearProducto()">
+        Crear
+      </button>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-block" (click)="modal.close()">
+      Cancelar
+    </button>
+    </div>
+</ng-template>
+
+<ng-template #editar let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Editar Producto</h4>
+        <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="inputFistName">Nombre</label>
+                <input type="text" class="form-control" id="inputFistName" name="inputFistName" [(ngModel)]="productModal.nombre" />
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputPrecio">Precio</label>
+                    <input type="number" class="form-control" id="inputPrecio" name="inputPrecio" [(ngModel)]="productModal.precio" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputStock">Stock</label>
+                    <input type="number" class="form-control" id="inputStock" name="inputStock" [(ngModel)]="productModal.stock" />
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-block btn-success color-main" (click)="editarProducto()">
+        Editar
+      </button>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-block" (click)="modal.close()">
+      Cancelar
+    </button>
+    </div>
+</ng-template>
